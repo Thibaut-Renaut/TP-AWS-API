@@ -1,1 +1,20 @@
+name: Pipeline CICD projet master
 
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: masterapp
+
+jobs:
+  build:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: lancer le test
+        run: ls -lah
