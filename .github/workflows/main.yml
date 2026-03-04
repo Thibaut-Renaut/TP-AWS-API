@@ -18,3 +18,21 @@ jobs:
 
       - name: lancer le test
         run: ls -lah
+
+  build:
+    name: build
+    runs-on:: ubuntu-latest
+    steps: 
+    - name: récupérer le code
+      uses: actions/checkout@v4
+
+    - name: build image
+      run : docker build -t ${{env.IMAGE_NAME}} .
+
+    - name: run image
+      uses: docker run -p 3000:3000 ${{env.IMAGE_NAME}}
+
+    - name: tester le conteneur
+      uses: "curl 127.0.0.1:3000"
+
+    
