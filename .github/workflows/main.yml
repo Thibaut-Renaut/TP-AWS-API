@@ -35,20 +35,20 @@ jobs:
         run: docker run -d -p 3000:3000 ${{env.IMAGE_NAME}}
 
       - name: Tager en version courante
-        run: "docker tag ${{env.IMAGE_NAME}}:1.0 ${{env.REPO}}/${{github.actor}}/${{env.IMAGE_NAME}}:1.0"
+        run: "docker tag ${{env.IMAGE_NAME}} ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:1.0"
 
       - name: Tager en version latest
-        run: "docker tag ${{env.IMAGE_NAME}}:1.0 ${{env.REPO}}/${{github.actor}}/${{env.IMAGE_NAME}}:latest"
+        run: "docker tag ${{env.IMAGE_NAME}} ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:latest"
 
       - name: connexion a GHCR
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REPO }}
-          username: ${{ github.actor }}
+          username: thibaut-renaut
           password: ${{ secrets.TOKENCICD }}
 
       - name: Push de l'image V1.0
-        run: "docker push ${{env.REPO}}/${{github.actor}}/${{env.IMAGE_NAME}}:1.0"
+        run: "docker push ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:1.0"
 
       - name: Push de l'image latest
-        run: "docker push ${{env.REPO}}/${{github.actor}}/${{env.IMAGE_NAME}}:latest"
+        run: "docker push ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:latest"
