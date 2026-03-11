@@ -52,3 +52,18 @@ jobs:
 
       - name: Push de l'image latest
         run: "docker push ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:latest"
+
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: connexion SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.KEY }}
+          script: |
+            pwd
+            ls
