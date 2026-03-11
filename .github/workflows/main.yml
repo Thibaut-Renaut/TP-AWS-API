@@ -66,6 +66,6 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             echo ${{ secrets.TOKENCICD }} | docker login ghcr.io -u thibaut-renaut --password-stdin
-            sudo docker pull ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:latest
-            sudo docker run -d -p 3000:3000 --name ${{env.IMAGE_NAME}} ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:latest
+            docker pull ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:latest
+            docker run -d -p 3000:3000 --name ${{env.IMAGE_NAME}} ${{env.REPO}}/thibaut-renaut/${{env.IMAGE_NAME}}:latest
             curl localhost:3000
